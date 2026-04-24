@@ -1,0 +1,351 @@
+/* ============================================================
+   VARIABLES GLOBALES — colores y tipografía en un solo lugar
+   Cambiar aquí afecta toda la página
+   ============================================================ */
+:root {
+    --color-bg:       #000000;
+    --color-text:     aliceblue;
+    --color-border:   aliceblue;
+    --color-shadow:   black;
+    --color-btn-bg:   #060d11;
+    --font-base:      sans-serif;
+    --radius:         1vh;
+}
+
+/* ============================================================
+   RESET Y ESTILOS GLOBALES
+   ============================================================ */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-base);
+    font-style: italic;
+    scroll-behavior: smooth;
+    scroll-padding-top: 30%;
+}
+
+/* ============================================================
+   FONDO DE PÁGINA — compartido por index y pets
+   ============================================================ */
+#body-index,
+#mypets {
+    background-image: url("27230.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: var(--color-bg);
+}
+
+/* ============================================================
+   ENCABEZADO FIJO — Flexbox: h1 y ul en fila centrados
+   ============================================================ */
+header {
+    height: 20vh;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    padding: 3vh;
+    display: flex;
+    justify-content: space-around; /* Distribuye h1 y ul con espacio uniforme */
+    align-items: center;           /* Centra verticalmente el contenido */
+    color: var(--color-text);
+    background-image: url("27230.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: var(--color-bg);
+    box-shadow: 5px 2px 10px var(--color-shadow);
+}
+
+/* ============================================================
+   TÍTULOS — unidades relativas (rem) para escalar en pantallas
+   ============================================================ */
+h1 { padding: 1vh; text-shadow: -2px 2px 5px rgba(0,0,0,0.5); font-size: 1.5rem; }
+h3 { padding: 2vh; text-shadow: -2px 2px 5px rgba(0,0,0,0.5); font-size: 1rem; }
+
+/* h2 dentro de section, form y article — estilos agrupados*/
+section > h2,
+form > h2,
+article > h2 {
+    padding: 2vh;
+    text-align: center;
+    color: var(--color-text);
+    text-shadow: -2px -2px 10px rgba(0,0,0,0.5);
+    font-size: 1.2rem; /* unidad relativa*/
+}
+
+article > h2 { padding-top: 4vh; }
+
+/* ============================================================
+   NAVEGACIÓN PRINCIPAL — columna vertical con Flexbox
+   ============================================================ */
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ============================================================
+   SECCIONES — tarjetas de contenido
+   ============================================================ */
+section {
+    margin: 20vh;
+    padding: 10vh;
+    width: 50%;
+    border: 0.1vh solid;
+    border-radius: var(--radius);
+    box-shadow: -4px 4px 10px var(--color-shadow);
+}
+
+#About-me { margin-top: 20%; }
+
+section > p {
+    color: var(--color-text);
+    word-spacing: 0.5vh;
+    text-align: justify;
+    font-size: 1rem; /* unidad relativa*/
+}
+
+/* ============================================================
+   SECCIÓN PROYECTOS — CSS Grid: 3 columnas iguales
+   ============================================================ */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2vh;
+    margin-top: 2vh;
+}
+
+/* ============================================================
+    TARJETAS Y LISTAS
+    estilos comunes agrupados aplica tanto a los li del menú como a los enlaces del grid
+   ============================================================ */
+li,
+.projects-grid a {
+    border-radius: var(--radius);
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+li { padding: 1vh; }
+
+.projects-grid a {
+    display: block;
+    padding: 2vh;
+    text-align: center;
+    border: 0.1vh solid var(--color-border);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+/* Efecto hover compartido: flota hacia arriba */
+li:hover,
+.projects-grid a:hover {
+    transform: translateY(-10px);
+    border: 0.1vh solid var(--color-border);
+    background-color: var(--color-bg);
+    box-shadow: -2px 2px 4px var(--color-shadow);
+}
+
+/* ============================================================
+   LISTAS — menú del header y retorno en pets
+   ============================================================ */
+ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 50px;
+    margin-top: 1vh;
+}
+
+/* ============================================================
+   ENLACES
+   ============================================================ */
+a {
+    padding: 0.5vh;
+    border-radius: var(--radius);
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+/* ============================================================
+   FORMULARIO
+   ============================================================ */
+label {
+    margin: 2vh;
+    font-weight: bold;
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+input {
+    margin: 1vh;
+    padding: 1vh;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0.2vh solid var(--color-border);
+    border-radius: var(--radius);
+}
+
+/* Estilo común para todos los botones*/
+button {
+    margin: 2vh;
+    width: 15vh;
+    height: 5vh;
+    border-radius: 0.5vh;
+    box-shadow: -2px 2px 2px rgba(0,0,0,0.5);
+    color: var(--color-text);
+    background-color: var(--color-btn-bg);
+    cursor: pointer;
+}
+
+/* Mensaje oculto del formulario — JavaScript lo muestra*/
+.hidden { display: none; }
+
+#welcome-msg {
+    color: var(--color-text);
+    text-align: center;
+    padding: 1vh;
+    font-size: 1rem;
+}
+
+/* ============================================================
+   PIE DE PÁGINA
+   ============================================================ */
+footer {
+    padding: 4vh;
+    text-align: center;
+    color: var(--color-text);
+    box-shadow: -5px -2px 10px var(--color-shadow);
+}
+
+/* ============================================================
+   ARTÍCULOS DE MASCOTAS — tarjetas individuales
+   ============================================================ */
+article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5vh;
+    padding: 15vh 0 17vh;
+    width: 25%;
+    height: 65vh;
+    border: 0.1vh solid;
+    border-radius: var(--radius);
+    box-shadow: -4px 4px 10px var(--color-shadow);
+}
+
+article > p {
+    padding: 2vh;
+    word-spacing: 0.5vh;
+    text-align: center;
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+/* Imágenes dentro de article */
+article img {
+    width: 50vh;
+    height: 50vh;
+    max-width: 100%; /* responsiva (Task 3) */
+    height: auto;
+}
+
+#husky, #cat { margin-top: 15%; }
+#rabbit      { margin-top: 5%;  }
+
+/* ============================================================
+   GALERÍA DE MASCOTAS
+   ============================================================ */
+#gallery {
+    width: 80%;
+    margin: 5vh auto;
+    padding: 4vh;
+    border: 0.1vh solid;
+    border-radius: var(--radius);
+    box-shadow: -4px 4px 10px var(--color-shadow);
+}
+
+/* Fila Flexbox: imágenes en fila, saltan si no caben */
+.gallery-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2vh;
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+}
+
+
+/* Imágenes de la galería — responsivas*/
+.gallery-flex img,
+.gallery-grid img {
+    width: 100%;
+    max-width: 25vh;
+    height: auto;        /* alto automático para no deformar*/
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 0.1vh solid var(--color-border);
+}
+
+/* ============================================================
+   ENLACE DE RETORNO (pets.html)
+   ============================================================ */
+#return-pets {
+    display: flex;
+    margin-bottom: 5vh;
+    color: var(--color-text);
+}
+
+/* ============================================================
+   MEDIA QUERY — MÓVILES (pantallas pequeñas, max 600px)
+   Task 2: menú en columna, proyectos 1 columna, galería 2 columnas
+   ============================================================ */
+@media (max-width: 600px) {
+
+    /* Menú del header cambia a columna */
+    header {
+        flex-direction: column;
+        height: auto;
+        padding: 2vh;
+    }
+
+    ul { flex-direction: column; gap: 10px; }
+
+    /* Secciones ocupan casi todo el ancho */
+    section { width: 90%; margin: 15vh 5%; padding: 5vw; }
+
+    /* Proyectos: 1 sola columna */
+    .projects-grid { grid-template-columns: 1fr; }
+
+    /* Galería: 2 columnas */
+    .gallery-grid  { grid-template-columns: repeat(2, 1fr); }
+
+    /* Artículos de mascotas: más anchos en móvil */
+    article { width: 85%; }
+}
+
+/* ============================================================
+   MEDIA QUERY — TABLETS 
+   ============================================================ */
+@media (min-width: 601px) and (max-width: 1024px) {
+
+    /* Proyectos: 2 columnas */
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Galería: 3 columnas */
+    .gallery-grid  { grid-template-columns: repeat(3, 1fr); }
+
+    section { width: 70%; }
+    article { width: 40%; }
+}
+
+/* ============================================================
+   ESCRITORIO (más de 1024px) — layout de 3 o más columnas
+   Task 2: se mantiene el diseño base definido arriba
+   ============================================================ */

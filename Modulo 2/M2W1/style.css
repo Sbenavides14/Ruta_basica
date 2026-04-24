@@ -1,0 +1,220 @@
+/*RESET Y ESTILOS GLOBALES
+    Aplica a todos los elementos de la página*/
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;      /* El borde y padding no aumentan el tamaño del elemento */
+    font-family: sans-serif;
+    font-style: italic;
+    scroll-behavior: smooth;     /* Desplazamiento suave al hacer clic en los enlaces del menú */
+    scroll-padding-top: 30%;     /* Espacio superior para que el header fijo no tape el contenido al hacer scroll */
+}
+
+/* FONDO DE PÁGINA
+    Compartido por index.html (#body-index) y pets.html (#mypets)*/
+#body-index, #mypets {
+    background-image: url("27230.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* El fondo no se mueve al hacer scroll (efecto parallax) */
+    background-color: #000000;    /* Color de respaldo si la imagen no carga */
+}
+
+/* ENCABEZADO FIJO
+    Barra de navegación superior que permanece visible al hacer scroll*/
+header {
+    
+    height: 20vh;
+    width: 100%;
+    position: fixed;             /* Se queda pegado en la parte superior */
+    z-index: 1000;               /* Aparece por encima de todo el contenido */
+    padding: 3vh;
+    text-align: center;
+    color: aliceblue;
+    background-image: url("27230.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #000000;
+    box-shadow: 5px 2px 10px black; /* Sombra inferior para separar el header del contenido */
+}
+
+/* TÍTULOS*/
+
+/* Título principal (h1) */
+h1 {
+    tes
+    padding: 1vh;
+    text-shadow: -2px 2px 5px rgba(0, 0, 0, 0.50); /* Sombra sutil para mejor legibilidad */
+}
+
+/* Subtítulos dentro de <section> y <form> — mismos estilos, agrupados */
+section > h2,
+form > h2 {
+    padding: 2vh;
+    text-align: center;
+    color: aliceblue;
+    text-shadow: -2px -2px 10px rgba(0, 0, 0, 0.50);
+}
+
+/* Subtítulos dentro de <article> (página de mascotas) */
+article > h2 {
+    padding-top: 4vh;
+    text-align: center;
+    color: aliceblue;
+    text-shadow: -2px -2px 10px rgba(0, 0, 0, 0.50);
+}
+
+/* Pie de página (h3) */
+h3 {
+    padding: 2vh;
+    text-shadow: -2px 2px 5px rgba(0, 0, 0, 0.50);
+}
+
+/*NAVEGACIÓN PRINCIPAL
+    Centra las secciones en columna vertical*/
+nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*SECCIONES (index.html)
+    Tarjetas de contenido: About me, Projects, Contact me*/
+section {
+    margin: 20vh;
+    padding: 10vh;
+    width: 50%;
+    border: 0.1vh solid;
+    border-radius: 1vh;
+    box-shadow: -4px 4px 10px black;
+}
+
+/*Empuja la primera sección hacia abajo para que no quede tapada por el header fijo */
+#About-me {
+    margin-top: 20%;
+}
+
+/*Texto de las secciones */
+section > p {
+    color: aliceblue;
+    word-spacing: 0.5vh;
+    text-align: justify;
+}
+
+/* LISTAS Y ELEMENTOS DE LISTA
+    Usadas en el menú del header y en la sección de proyectos*/
+ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;            /* Quita los puntos/números de lista */
+    gap: 50px;
+    margin-top: 1vh;
+}
+
+li {
+    transition: transform 0.3s ease; /* Animación suave al pasar el cursor */
+    padding: 1vh;
+    border-radius: 1vh;
+    font-weight: bold;
+}
+
+li:hover {
+    transform: translateY(-10px);        /* Salta hacia arriba al pasar el cursor */
+    border: 0.1vh solid aliceblue;
+    background-color: black;
+    box-shadow: -2px 2px 4px black;
+}
+
+/* ENLACES*/
+a {
+    padding: 0.5vh;
+    border-radius: 1vh;
+    font-weight: bold;
+    text-decoration: none;       /* Quita el subrayado de los enlaces */
+    color: aliceblue;
+}
+
+/* FORMULARIO DE CONTACTO*/
+label {
+    margin: 2vh;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+input {
+    margin: 1vh;
+    padding: 1vh;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0.2vh solid aliceblue;
+    border-radius: 1vh;
+}
+
+button {
+    margin: 2vh;
+    width: 15vh;
+    height: 5vh;
+    border-radius: 0.5vh;
+    box-shadow: -2px 2px 2px rgba(0, 0, 0, 0.50);
+    color: aliceblue;
+    background-color: #060d11;
+}
+
+/*PIE DE PÁGINA*/
+footer {
+    padding: 4vh;
+    text-align: center;
+    color: aliceblue;
+    box-shadow: -5px -2px 10px black; /* Sombra superior para separar el footer del contenido */
+}
+
+/* ARTÍCULOS DE MASCOTAS (pets.html)
+    Tarjetas de cada mascota*/
+article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5vh;
+    padding-bottom: 17vh;
+    padding-top: 15vh;
+    width: 25%;
+    height: 65vh;
+    border: 0.1vh solid;
+    border-radius: 1vh;
+    box-shadow: -4px 4px 10px black;
+}
+
+/* Texto descriptivo dentro de cada artículo */
+article > p {
+    padding: 2vh;
+    word-spacing: 0.5vh;
+    text-align: center;
+    color: aliceblue;
+}
+
+/* Imágenes de las mascotas */
+img {
+    width: 50vh;
+    height: 50vh;
+}
+
+/* Posicionamiento individual de cada tarjeta de mascota */
+#husky, #cat {
+    margin-top: 15%;
+}
+
+#rabbit {
+    margin-top: 5%;
+}
+
+/*ENLACE DE RETORNO (pets.html)*/
+#return-pets {
+    display: flex;
+    margin-bottom: 5vh;
+    color: aliceblue;
+}

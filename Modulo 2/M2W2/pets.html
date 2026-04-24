@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Pets</title>
+    </head>
+    <body id="mypets">
+
+        <!-- Barra de navegación fija con los enlaces a cada mascota -->
+        <header>
+            <h1>My Pets</h1>
+            <!-- Lista de navegación — centrada con flexbox en style.css -->
+            <ul>
+                <li><a href="#husky">Husky siberian</a></li>
+                <li><a href="#cat">European cat</a></li>
+                <li><a href="#rabbit">domestic rabbit</a></li>
+            </ul>
+        </header>
+
+        <!-- nav centra las secciones en columna vertical (flexbox) -->
+        <nav>
+
+            <!-- Tarjeta: Husky siberiano -->
+            <article id="husky">
+                <h2>Siberian Husky</h2>
+                <p>A strong and energetic dog with thick fur and striking eyes. Friendly, intelligent, and resistant to extreme cold.</p>
+                <img src="siberian-husky.png" alt="Imagen de husky siberiano" title="Husky siberiano">
+            </article>
+
+            <!-- Tarjeta: Gato europeo -->
+            <article id="cat">
+                <h2>European common cat</h2>
+                <p>Short-haired, gray, and soft-coated cat. Curious and calm-looking, agile and attentive to its surroundings.</p>
+                <img src="gato.png" alt="Imagen de un gato" title="Gato">
+            </article>
+
+            <!-- Tarjeta: Conejo doméstico -->
+            <article id="rabbit">
+                <h2>White domestic rabbit</h2>
+                <p>A rabbit with dense white fur, a robust body, and erect ears. Calm, docile, and with a clean and gentle appearance.</p>
+                <img src="white-rabbit.png" alt="Imagen de conejo" title="Conejo domestico">
+            </article>
+
+        </nav>
+
+        <!-- Galería de mascotas: mínimo 6 imágenes organizadas con Flexbox-->
+        <section id="gallery">
+            <h2>Gallery</h2>
+
+            <!--Fila superior: distribuida con Flexbox (display: flex; flex-wrap: wrap)-->
+            <div class="gallery-flex">
+                <img src="aguila.png" alt="Aguila" title="Aguila">
+                <img src="oso polar.png"           alt="Oso polar"    title="Oso polar">
+                <img src="pinguino.png"   alt="Pinguino"   title="Pinguino">
+            </div>
+
+            <!--Fila inferior: distribuida con Flexbox (display: flex; flex-wrap: wrap)-->
+            <div class="gallery-flex">
+                <img src="zebra.png" alt="Zebra" title="Zebra">
+                <img src="camaleon.png"           alt="Camaleon"    title="Camaleon">
+                <img src="leon.png"   alt="Leon"   title="Leon">
+            </div>
+        </section>
+
+        <!-- Enlace para volver al portafolio principal -->
+        <ul id="return-pets">
+            <li><a href="index.html">Return to portfolio</a></li>
+        </ul>
+
+        <!-- Pie de página con el nombre del autor -->
+        <footer>
+            <h3>Samuel E. Benavides De la cruz</h3>
+        </footer>
+
+    </body>
+</html>

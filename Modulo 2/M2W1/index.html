@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Portafolio</title>
+    </head>
+    <body id="body-index"> 
+        <!-- Barra de navegación fija con los enlaces a cada sección -->
+        <header>
+            <h1>Personal Portfolio</h1>
+            <ul>
+                <li><a href="#About-me">About me</a></li>
+                <li><a href="#Projects">Projects</a></li>
+                <li><a href="#formulario">Contact me</a></li>
+            </ul>
+        </header>
+        <main>
+            <!-- nav centra las secciones en columna vertical -->
+            <nav>
+                <!-- Sección: presentación personal -->
+                <section id="About-me">
+                    <h2>About me</h2>
+                    <p>
+                        Hi! Let me tell you a little about myself.<br><br>
+                        My name is Samuel, and I'm 24 years old. I like to describe myself as someone focused on learning about technology, especially software development. I like to move forward with purpose, organize my projects, and fully understand each step to continuously improve.
+                    </p>
+                </section>
+
+                <!-- Sección: listado de proyectos con enlaces -->
+                <section id="Projects">
+                    <h2>Projects</h2>
+                    <ul>
+                        <li><a href="">Library</a></li>
+                        <li><a href="https://github.com/" target="_blank">Github</a></li>
+                        <li><a href="pets.html">Pets</a></li>
+                    </ul>
+                </section>
+
+                <!-- Sección: formulario de contacto -->
+                <section id="formulario">
+                    <form name="formulario" id="form contac me" method="post">
+                        <h2>Contact me</h2>
+                        <div>
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="Name" placeholder="Thomas Benavides">
+                        </div>
+                        <div>
+                            <label for="Phone">Phone:</label>
+                            <input type="tel" id="Phone" name="Phone" placeholder="+57 3202302521">
+                        </div>
+                        <div>
+                            <label for="Email">Email:</label>
+                            <input type="email" id="Email" name="Email" placeholder="Sbenavides@gmail.com">
+                        </div>
+                        <button type="button">Send</button>
+                    </form>
+                </section>
+            </nav>
+        </main>
+        <!-- Pie de página con el nombre del autor -->
+        <footer>
+            <h3>Samuel E. Benavides De la cruz</h3>
+        </footer>
+    </body>
+</html>
