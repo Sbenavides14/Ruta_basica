@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+  <!--DOCTYPE: Le dice al navegador que este es HTML5 moderno.
+  Siempre va en la primera línea, sin excepción.-->
+
+<html lang="es">
+  <!--lang="es" : Le indica al navegador y a los lectores de pantalla
+  que el contenido está en español. Importante para accesibilidad.-->
+
+  <head>
+    <!--<head>: Todo lo que va aquí NO se ve en pantalla, pero es
+    esencial para configurar la página.-->
+
+    <meta charset="UTF-8">
+    <!--charset="UTF-8": Permite que el navegador muestre tildes,
+    la ñ, y caracteres especiales correctamente.-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- viewport: CLAVE para el diseño responsive.
+    width=device-width → el ancho de la página = ancho del dispositivo
+    initial-scale=1.0  → sin zoom inicial en móviles -->
+
+    <title>Sabores de la Noche – Festival Gastronómico</title>
+    <!-- <title>: Lo que aparece en la pestaña del navegador -->
+
+    <!--SIN Google Fonts: usamos una font-stack de fuentes del sistema.
+      system-ui → fuente nativa del SO (San Francisco en Mac, Segoe UI en Windows)
+      -apple-system → alias de San Francisco en Safari
+      Todas son sans-serif: limpias, sin serifa, de alta legibilidad.
+      Ventaja: carga instantánea (0 peticiones externas), máxima compatibilidad.-->
+
+    <link rel="stylesheet" href="styles.css">
+    <!--Vinculamos nuestro archivo CSS externo. -->
+  </head>
+
+  <body>
+    <!--<header>: Elemento semántico que representa la cabecera de la
+    página. Contiene el logo/nombre y la navegación principal.
+    Aparece una sola vez (o una por sección) y siempre arriba.
+
+    CAMBIO SEMÁNTICO: el logo antes usaba <div class="header__logo">
+    Ahora usa <p> para el bloque de texto del logo (contenido de párrafo)
+    y <span> para las piezas inline dentro de él. Sin div.-->
+    <header class="header">
+
+      <!--Logo / Nombre del festival
+      <p> + <span> anidados. Semánticamente, el logo
+      es un bloque de texto corto, no un contenedor genérico.-->
+      <p class="header__logo">
+        <span class="logo-icon">🌙</span>
+        <span class="logo-texts">
+          <span class="logo-title">SABORES</span>
+          <span class="logo-subtitle">de la Noche</span>
+        </span>
+      </p>
+
+      <!--Menú hamburguesa (para móvil): Solo es visual, se muestra/oculta
+      con CSS usando el truco del checkbox invisible.-->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      <label for="menu-toggle" class="hamburger" aria-label="Abrir menú">
+        <!-- Los tres span son las "rayas" del ícono hamburguesa -->
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <!--<nav>: Etiqueta semántica para navegación. Los lectores de
+      pantalla la identifican como zona de navegación principal.
+      <ul> + <li> es la estructura correcta para menús de navegación.-->
+      <nav class="nav">
+        <ul class="nav__list">
+          <!-- Cada <li> es un ítem de la lista (list item) -->
+          <li><a href="#fechas" class="nav__link">Fechas</a></li>
+          <li><a href="#sobre" class="nav__link">El Festival</a></li>
+          <li><a href="#zonas" class="nav__link">Experiencias</a></li>
+          <li><a href="#galeria" class="nav__link">Galería</a></li>
+          <li><a href="#contacto" class="nav__link">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!--Botón CTA (Call To Action) en el header -->
+      <a href="#fechas" class="btn btn--gold">Comprar Entrada</a>
+    </header>
+    <!-- FIN <header> -->
+
+
+    <!--<main>: Contiene el contenido principal de la página.
+      Solo debe haber UN <main> por página.-->
+    <main>
+
+      <section class="hero" id="inicio">
+
+        <!-- Capa de overlay oscuro encima del fondo (decorativa) -->
+        <span class="hero__overlay" aria-hidden="true"></span>
+
+        <!-- Contenido centrado del hero
+            <article> es semántico porque es el bloque de contenido
+            principal que tiene sentido por sí solo. -->
+        <article class="hero__content">
+
+          <!-- Etiqueta pequeña arriba del título -->
+          <span class="hero__tag">✦ Festival Gastronómico Nocturno ✦</span>
+
+          <!-- h1: Título principal de TODA la página. Solo debe haber uno. -->
+          <h1 class="hero__title">
+            Una Noche.<br>
+            <span class="hero__title--accent">Mil Sabores.</span><br>
+            Experiencias<br>Inolvidables.
+          </h1>
+
+          <!-- Párrafo de descripción corta -->
+          <p class="hero__description">
+            El festival gastronómico que despierta los sentidos.
+            Tres noches, tres ciudades, cientos de sabores únicos.
+          </p>
+
+          <!--<p> con display flex. Un párrafo puede contener
+              elementos inline-block como <a>, y con CSS lo convertimos
+              en flex-->
+          <p class="hero__buttons">
+            <a href="#fechas" class="btn btn--gold">Conoce Más</a>
+            <a href="#sobre" class="btn btn--outline">Ver Programa</a>
+          </p>
+
+        </article>
+        <!-- FIN hero__content (article) -->
+
+      </section>
+      <!-- FIN HERO -->
+
+
+      <!--SECCIÓN PRÓXIMAS FECHAS
+        <header> (cada <section> puede
+          tener su propio <header> con título y subtítulo)
+          la tabla se envuelve en <figure> (contenedor semántico para contenido
+          autónomo como tablas, gráficos, imágenes con caption)-->
+      <section class="section section--dark" id="fechas">
+
+        <!-- <header> dentro de <section>: válido y semántico -->
+        <header class="section__header">
+          <span class="section__tag">Agenda</span>
+          <h2 class="section__title">Próximas Fechas</h2>
+          <p class="section__subtitle">Tres noches únicas en las joyas del Caribe colombiano</p>
+        </header>
+
+        <!-- ====
+          <figure>: envuelve contenido autónomo (imagen, tabla, código…)
+          que complementa el texto principal pero podría moverse sin
+          perder contexto. Perfecto para reemplazar <div class="table-wrapper">.
+          ==== -->
+        <figure class="table-wrapper">
+
+          <table class="festival-table">
+
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Lugar</th>
+                <th scope="col">Horario</th>
+                <th scope="col">Atracción Principal</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><span class="date-badge">17 Mayo</span></td>
+                <td>Barranquilla</td>
+                <td>Plaza de la Paz</td>
+                <td>6:00 PM – 11:00 PM</td>
+                <td>🔥 Show de Fuego</td>
+              </tr>
+              <tr>
+                <td><span class="date-badge">24 Mayo</span></td>
+                <td>Cartagena</td>
+                <td>Muelle de los Pegasos</td>
+                <td>7:00 PM – 12:00 AM</td>
+                <td>👨‍🍳 Chef Invitado</td>
+              </tr>
+              <tr>
+                <td><span class="date-badge">31 Mayo</span></td>
+                <td>Santa Marta</td>
+                <td>Bahía Outdoor</td>
+                <td>5:30 PM – 11:00 PM</td>
+                <td>🎵 Música en Vivo</td>
+              </tr>
+            </tbody>
+
+          </table>
+
+        </figure>
+        <!-- FIN figure (table-wrapper) -->
+
+      </section>
+      <!-- FIN SECCIÓN FECHAS -->
+
+
+      <!-- ====
+        SECCIÓN SOBRE EL FESTIVAL
+        CAMBIO SEMÁNTICO:
+        - <div class="section__header">       → <header>
+        - <div class="about-grid">            → <section> interna con role descriptivo
+                                                (FLEXBOX layout se aplica con CSS igual)
+        - <div class="about-grid__text">      → <section> o mejor <div> no...
+                                                → usamos <article> para la columna de texto
+        - <div class="about-grid__image">     → <figure> (contiene imagen/placeholder)
+        - <div class="about__img-placeholder">→ <figure> interno con <figcaption>
+        ==== -->
+      <section class="section section--medium" id="sobre">
+
+        <header class="section__header">
+          <span class="section__tag">Nuestra Historia</span>
+          <h2 class="section__title">Sobre el Festival</h2>
+        </header>
+
+        <!-- Layout de dos columnas con Flexbox.
+            Antes: <div class="about-grid">
+            Ahora: usamos <section> interna porque agrupa contenido
+            relacionado (texto + imagen) que forma una unidad temática. -->
+        <section class="about-grid" aria-label="Descripción del festival">
+
+          <!-- Columna de texto: <article> porque es contenido
+              independiente (descripción + lista) que tiene sentido solo -->
+          <article class="about-grid__text">
+            <p class="about__description">
+              <strong>Sabores de la Noche</strong> es un encuentro único desde la gastronomía,
+              la música y la cultura, un espacio donde chefs locales e internacionales
+              crean momentos inolvidables bajo las estrellas.
+            </p>
+            <p class="about__description">
+              Más de 50 expositores, 3 escenarios musicales y experiencias que van desde
+              la comida callejera más auténtica hasta la alta cocina de vanguardia.
+            </p>
+
+            <!-- LISTA SEMÁNTICA OBLIGATORIA -->
+            <h3 class="about__list-title">¿Qué encontrarás?</h3>
+            <ul class="about__list">
+              <li class="about__list-item">
+                <span class="list-icon">🍽️</span>
+                Cocina de autor y gastronomía local
+              </li>
+              <li class="about__list-item">
+                <span class="list-icon">🍹</span>
+                Food trucks y barras de coctelería
+              </li>
+              <li class="about__list-item">
+                <span class="list-icon">🎶</span>
+                Música en vivo toda la noche
+              </li>
+              <li class="about__list-item">
+                <span class="list-icon">🏆</span>
+                Concursos y talleres gastronómicos
+              </li>
+              <li class="about__list-item">
+                <span class="list-icon">🌙</span>
+                Ambiente único bajo las estrellas
+              </li>
+            </ul>
+          </article>
+          <!-- FIN columna texto (article) -->
+
+          <!-- Columna imagen: <figure> es el elemento semántico
+              correcto para imágenes, ilustraciones y placeholders.
+              Antes: <div class="about-grid__image"><div class="about__img-placeholder">
+              Ahora: <figure> anidado con <figcaption> -->
+          <figure class="about-grid__image">
+            <figure class="about__img-placeholder">
+              <span class="img-emoji">👨‍🍳</span>
+              <figcaption>Alta cocina<br>bajo las estrellas</figcaption>
+            </figure>
+          </figure>
+          <!-- FIN columna imagen (figure) -->
+
+        </section>
+        <!-- FIN about-grid -->
+
+      </section>
+      <!-- FIN SECCIÓN SOBRE -->
+
+
+      <!-- ====
+        SECCIÓN ZONAS TEMÁTICAS
+        CAMBIO SEMÁNTICO:
+        - <div class="section__header"> → <header>
+        - <div class="zones-grid">      → <ul> (lista de cards)
+          Cada zona temática ES un ítem de una lista no ordenada.
+          <article> dentro de <li> es válido y semántico.
+        ==== -->
+      <section class="section section--dark" id="zonas">
+
+        <header class="section__header">
+          <span class="section__tag">Explora</span>
+          <h2 class="section__title">Zonas Temáticas</h2>
+          <p class="section__subtitle">Cada zona es un mundo de sabores diferente</p>
+        </header>
+
+        <!-- <ul> como contenedor CSS Grid de cards.
+            Antes: <div class="zones-grid">
+            Ahora: <ul class="zones-grid"> – las tarjetas SON una lista
+            de elementos temáticos equivalentes entre sí. -->
+        <ul class="zones-grid">
+
+          <li>
+            <article class="zone-card">
+              <span class="zone-card__icon">🌍</span>
+              <h3 class="zone-card__title">Sabores del Mundo</h3>
+              <p class="zone-card__desc">Cocinas internacionales de Asia, Europa y América Latina</p>
+            </article>
+          </li>
+
+          <li>
+            <article class="zone-card">
+              <span class="zone-card__icon">🏘️</span>
+              <h3 class="zone-card__title">Cocina Local</h3>
+              <p class="zone-card__desc">Lo mejor de la gastronomía caribeña colombiana</p>
+            </article>
+          </li>
+
+          <li>
+            <article class="zone-card">
+              <span class="zone-card__icon">🍰</span>
+              <h3 class="zone-card__title">Postres & Dulces</h3>
+              <p class="zone-card__desc">Repostería artesanal y dulces tradicionales</p>
+            </article>
+          </li>
+
+          <li>
+            <article class="zone-card">
+              <span class="zone-card__icon">🍸</span>
+              <h3 class="zone-card__title">Bebidas & Cócteles</h3>
+              <p class="zone-card__desc">Bartenders expertos y mezclas únicas</p>
+            </article>
+          </li>
+
+          <li>
+            <article class="zone-card">
+              <span class="zone-card__icon">🎵</span>
+              <h3 class="zone-card__title">Música & Arte</h3>
+              <p class="zone-card__desc">Escenario en vivo con artistas locales e internacionales</p>
+            </article>
+          </li>
+
+          <li>
+            <article class="zone-card">
+              <span class="zone-card__icon">🌿</span>
+              <h3 class="zone-card__title">Zona Saludable</h3>
+              <p class="zone-card__desc">Opciones veganas, vegetarianas y libres de gluten</p>
+            </article>
+          </li>
+
+        </ul>
+        <!-- FIN zones-grid (ul) -->
+
+      </section>
+      <!-- FIN SECCIÓN ZONAS -->
+
+
+      <!-- ====
+        SECCIÓN GALERÍA
+        CAMBIO SEMÁNTICO:
+        - <div class="section__header">     → <header>
+        - <div class="gallery-grid">        → <ul> (lista de ítems visuales)
+        - <div class="gallery-item">        → <li> (ítem de la lista)
+        - <div class="gallery-placeholder"> → <figure>
+        - <div class="gallery-overlay">     → <figcaption>
+        ==== -->
+      <section class="section section--medium" id="galeria">
+
+        <header class="section__header">
+          <span class="section__tag">Momentos</span>
+          <h2 class="section__title">Galería</h2>
+          <p class="section__subtitle">Imágenes de ediciones anteriores</p>
+        </header>
+
+        <!-- <ul> como grid de galería -->
+        <ul class="gallery-grid">
+
+          <li class="gallery-item gallery-item--large">
+            <figure class="gallery-placeholder">🍢</figure>
+            <figcaption class="gallery-overlay">
+              <span>Street Food Show</span>
+            </figcaption>
+          </li>
+
+          <li class="gallery-item">
+            <figure class="gallery-placeholder">🔥</figure>
+            <figcaption class="gallery-overlay"><span>Show de Fuego</span></figcaption>
+          </li>
+
+          <li class="gallery-item">
+            <figure class="gallery-placeholder">👨‍🍳</figure>
+            <figcaption class="gallery-overlay"><span>Chef en Acción</span></figcaption>
+          </li>
+
+          <li class="gallery-item gallery-item--wide">
+            <figure class="gallery-placeholder">🌮</figure>
+            <figcaption class="gallery-overlay"><span>Zona Food Trucks</span></figcaption>
+          </li>
+
+          <li class="gallery-item">
+            <figure class="gallery-placeholder">🍹</figure>
+            <figcaption class="gallery-overlay"><span>Coctelería</span></figcaption>
+          </li>
+
+          <li class="gallery-item">
+            <figure class="gallery-placeholder">🎶</figure>
+            <figcaption class="gallery-overlay"><span>Música en Vivo</span></figcaption>
+          </li>
+
+        </ul>
+        <!-- FIN gallery-grid (ul) -->
+
+      </section>
+      <!-- FIN SECCIÓN GALERÍA -->
+
+
+      <!-- ====
+        SECCIÓN CTA FINAL
+        CAMBIO SEMÁNTICO:
+        - <div class="cta-section__content"> → <article> (bloque
+          de contenido independiente con título, texto y acción)
+        ==== -->
+      <section class="cta-section">
+        <article class="cta-section__content">
+          <h2 class="cta-section__title">¿Listo para la experiencia?</h2>
+          <p class="cta-section__text">Las entradas son limitadas. No te quedes sin la tuya.</p>
+          <a href="#fechas" class="btn btn--gold btn--large">Comprar Entradas Ahora</a>
+        </article>
+      </section>
+
+    </main>
+    <!-- FIN <main> -->
+
+
+    <!-- ====
+      <footer>: Pie de página. Aparece al final del sitio.
+      CAMBIO SEMÁNTICO:
+      - <div class="footer__grid">  → <section> interna con aria-label
+      - <div class="footer__col">   → <section> o <article> según el contenido
+        · Columna logo/desc         → <section aria-label="Sobre el festival">
+        · Columna navegación        → <nav aria-label="Footer navigation">
+        · Columna ciudades          → <address> (elemento para info de contacto/ubicación)
+        · Columna newsletter        → <section aria-label="Newsletter">
+      - <div class="footer__logo">  → <p> (mismo patrón que el header)
+      - <div class="footer__social">→ <nav aria-label="Redes sociales">
+      - <div class="newsletter">    → <p> con flex (igual que hero__buttons)
+      - <div class="footer__bottom">→ <small> (semántico para copyright/avisos legales)
+      ==== -->
+    <footer class="footer" id="contacto">
+
+      <!-- Grid del footer
+          Antes: <div class="footer__grid">
+          Ahora: <section> porque agrupa contenido relacionado con
+          un propósito común dentro del footer. -->
+      <section class="footer__grid" aria-label="Información del pie de página">
+
+        <!-- Columna 1: Logo y descripción -->
+        <section aria-label="Sobre el festival">
+          <p class="footer__logo">
+            <span>🌙</span>
+            <span class="logo-texts">
+              <span class="logo-title">SABORES</span>
+              <span class="logo-subtitle">de la Noche</span>
+            </span>
+          </p>
+          <p class="footer__desc">
+            El festival gastronómico nocturno más importante del Caribe colombiano.
+          </p>
+          <!-- Redes sociales -->
+          <nav class="footer__social" aria-label="Redes sociales">
+            <a href="#" class="social-link" aria-label="Instagram">📸</a>
+            <a href="#" class="social-link" aria-label="Facebook">👍</a>
+            <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+            <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+          </nav>
+        </section>
+
+        <!-- Columna 2: Links de navegación -->
+        <nav aria-label="Navegación footer">
+          <h4 class="footer__heading">Enlace Rápidos</h4>
+          <ul class="footer__links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#fechas">Fechas</a></li>
+            <li><a href="#sobre">El Festival</a></li>
+            <li><a href="#zonas">Experiencias</a></li>
+            <li><a href="#galeria">Galería</a></li>
+          </ul>
+        </nav>
+
+        <!-- Columna 3: Ciudades
+            <address>: elemento semántico para información de contacto,
+            ubicación o datos de un autor/organización. -->
+        <address>
+          <h4 class="footer__heading">Ciudades</h4>
+          <ul class="footer__links">
+            <li>📍 Barranquilla – 17 Mayo</li>
+            <li>📍 Cartagena – 24 Mayo</li>
+            <li>📍 Santa Marta – 31 Mayo</li>
+          </ul>
+        </address>
+
+        <!-- Columna 4: Newsletter -->
+        <section aria-label="Newsletter">
+          <h4 class="footer__heading">Newsletter</h4>
+          <p class="footer__desc">Recibe novedades del festival directamente en tu correo.</p>
+          <!-- Sin div: el newsletter se envuelve en <p> con flex,
+              igual que el grupo de botones del hero. -->
+          <p class="newsletter">
+            <input type="email" class="newsletter__input" placeholder="Tu correo electrónico">
+            <button class="newsletter__btn" type="button">→</button>
+          </p>
+        </section>
+
+      </section>
+      <!-- FIN footer__grid (section) -->
+
+      <!-- Línea de copyright
+          <small>: elemento semántico para contenido secundario,
+          avisos legales, copyright. Antes era <div class="footer__bottom"> -->
+      <small class="footer__bottom">
+        <p>© 2025 Sabores de la Noche. Todos los derechos reservados.</p>
+      </small>
+
+    </footer>
+    <!-- FIN <footer> -->
+
+  </body>
+</html>

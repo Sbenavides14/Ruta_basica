@@ -1,0 +1,1129 @@
+/* ================================================================
+    FESTIVAL GASTRONÓMICO NOCTURNO – styles.css
+    
+    CAMBIO PRINCIPAL: Sin Google Fonts.
+    Se usa una font-stack de fuentes del sistema (system sans-serif).
+   ================================================================ */
+
+
+/* ================================================================
+    1. VARIABLES CSS (Custom Properties)
+   ================================================================ */
+:root {
+  /* --- PALETA DE COLORES (festival nocturno) --- */
+  --color-bg-dark:    #0d0a12;
+  --color-bg-medium:  #130f1e;
+  --color-bg-card:    #1c1430;
+  --color-gold:       #f5c842;
+  --color-gold-dark:  #c9a020;
+  --color-orange:     #e8743a;
+  --color-text:       #e8e0f0;
+  --color-text-muted: #9080b0;
+  --color-border:     #2d2050;
+
+  /* --- TIPOGRAFÍA (fuentes del sistema, sin Google Fonts) ---
+  
+      system-ui      → fuente nativa del SO actual
+      -apple-system  → alias de San Francisco en Safari/macOS/iOS
+      Segoe UI       → Windows 10/11
+      Roboto         → Android / Chrome OS
+      Helvetica Neue → macOS legacy
+      Arial          → Fallback universal
+      sans-serif     → Último recurso genérico
+      
+      Resultado: fuente sans-serif sin serifa, moderna, con
+      carga instantánea (ya está en el dispositivo del usuario).
+      Una sola font-stack para todo el sitio: limpio y coherente.
+    */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto,
+              "Helvetica Neue", Arial, sans-serif;
+
+  /* Antes había dos fuentes: --font-display (Playfair Display, serif)
+      y --font-body (Lato, sans-serif). Ahora usamos solo --font-sans
+      para todo. Los títulos se diferencian por peso y tamaño, no por familia.
+     Esto es una práctica moderna: type scale sin cambio de familia. */
+
+  /* --- ESPACIADO --- */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   32px;
+  --space-xl:   64px;
+  --space-xxl:  96px;
+
+  /* --- BORDES REDONDEADOS --- */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 999px;
+
+  /* --- TRANSICIONES --- */
+  --transition: 0.3s ease;
+}
+
+
+/* ================================================================
+  2. RESET / BASE
+   ================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);      /* ← fuente del sistema */
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg-dark);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* <address> por defecto tiene font-style: italic en los navegadores.
+   Lo reseteamos para que se vea igual que el resto del footer. */
+address {
+  font-style: normal;
+}
+
+
+/* ================================================================
+  3. COMPONENTES REUTILIZABLES
+   ================================================================ */
+
+/* --- BOTONES --- */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background-color var(--transition),
+              color var(--transition),
+              border-color var(--transition),
+              transform var(--transition);
+}
+
+.btn--gold {
+  background-color: var(--color-gold);
+  color: #0d0a12;
+  border-color: var(--color-gold);
+}
+
+.btn--gold:hover {
+  background-color: var(--color-gold-dark);
+  border-color: var(--color-gold-dark);
+  transform: translateY(-2px);
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn--outline:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.btn--large {
+  padding: 16px 40px;
+  font-size: 1rem;
+}
+
+
+/* --- SECCIONES: ESTRUCTURA COMÚN --- */
+.section {
+  padding: var(--space-xxl) var(--space-lg);
+}
+
+.section--dark {
+  background-color: var(--color-bg-dark);
+}
+
+.section--medium {
+  background-color: var(--color-bg-medium);
+}
+
+/* Encabezado de sección.
+    Antes: <div class="section__header">
+    Ahora: <header class="section__header"> dentro de <section>
+   El selector de clase funciona igual sin importar la etiqueta. */
+.section__header {
+  text-align: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-xl);
+}
+
+.section__tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid rgba(245, 200, 66, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-md);
+}
+
+.section__title {
+  font-family: var(--font-sans);
+  /* Sin Google Fonts: los títulos mantienen tamaño grande + font-weight
+     alto (800-900) para diferenciarse del cuerpo de texto. */
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.02em; /* Kerning negativo: look moderno en sans-serif */
+}
+
+.section__subtitle {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+
+/* ================================================================
+  4. HEADER
+   ================================================================ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-xl);
+  background-color: rgba(13, 10, 18, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Logo: antes <div class="header__logo">, ahora <p class="header__logo">.
+   El selector de clase funciona igual. */
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  /* Reseteamos el margin-bottom que tienen los <p> por defecto */
+  margin-bottom: 0;
+}
+
+.logo-icon {
+  font-size: 1.6rem;
+}
+
+/* <span class="logo-texts"> agrupa los dos spans de texto del logo */
+.logo-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-title {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--color-gold);
+  line-height: 1;
+  letter-spacing: 0.1em;
+}
+
+.logo-subtitle {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.nav__list {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.nav__link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-gold);
+  transition: width var(--transition);
+}
+
+.nav__link:hover {
+  color: var(--color-text);
+}
+
+.nav__link:hover::after {
+  width: 100%;
+}
+
+
+/* ================================================================
+   5. MENÚ HAMBURGUESA (solo CSS, sin JavaScript)
+   ================================================================ */
+.menu-toggle {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.menu-toggle:checked + .hamburger span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle:checked + .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle:checked + .hamburger span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.menu-toggle:checked ~ .nav {
+  transform: translateX(0);
+}
+
+
+/* ================================================================
+   6. HERO SECTION
+   ================================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background-image:
+    linear-gradient(135deg, rgba(13,10,18,0.7) 0%, rgba(30,15,50,0.6) 100%),
+    url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding-top: 80px;
+}
+
+/* Overlay: antes <div class="hero__overlay">, ahora <span class="hero__overlay">.
+   El selector de clase funciona igual. */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(13,10,18,0.8) 100%);
+  pointer-events: none;
+}
+
+/* Antes <div class="hero__content">, ahora <article class="hero__content"> */
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: var(--space-lg);
+}
+
+.hero__tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-lg);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.hero__title {
+  font-family: var(--font-sans);
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
+  animation: fadeInUp 0.8s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.hero__title--accent {
+  color: var(--color-gold);
+  -webkit-text-stroke: 2px var(--color-gold);
+  text-shadow: 0 0 30px rgba(245, 200, 66, 0.4);
+}
+
+.hero__description {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(232, 224, 240, 0.8);
+  max-width: 500px;
+  margin: 0 auto var(--space-xl);
+  animation: fadeInUp 0.8s ease 0.4s forwards;
+  opacity: 0;
+}
+
+/* Grupo de botones.
+   Antes: <div class="hero__buttons">
+   Ahora: <p class="hero__buttons">
+   Reseteamos margin y hacemos flex igual que antes. */
+.hero__buttons {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.6s forwards;
+  opacity: 0;
+  margin-bottom: 0; /* Resetea el margin-bottom por defecto del <p> */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ================================================================
+   7. TABLA HTML
+   ================================================================ */
+
+/* Antes: <div class="table-wrapper">
+   Ahora: <figure class="table-wrapper">
+   El selector de clase funciona igual; agregamos margin auto para
+   el <figure> que tiene display: block por defecto. */
+.table-wrapper {
+  overflow-x: auto;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.festival-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.festival-table thead th {
+  background-color: rgba(245, 200, 66, 0.1);
+  color: var(--color-gold);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 16px 20px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 2px solid rgba(245, 200, 66, 0.3);
+}
+
+.festival-table tbody td {
+  padding: 16px 20px;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.festival-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.festival-table tbody tr:hover td {
+  background-color: rgba(245, 200, 66, 0.05);
+}
+
+.date-badge {
+  display: inline-block;
+  background-color: rgba(245, 200, 66, 0.15);
+  color: var(--color-gold);
+  border: 1px solid rgba(245, 200, 66, 0.3);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+
+/* ================================================================
+   8. SECCIÓN SOBRE EL FESTIVAL + FLEXBOX
+   ================================================================ */
+
+/* Antes: <div class="about-grid">
+   Ahora: <section class="about-grid"> — el selector funciona igual */
+.about-grid {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xxl);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Antes: <div class="about-grid__text">
+   Ahora: <article class="about-grid__text"> */
+.about-grid__text {
+  flex: 1;
+}
+
+/* Antes: <div class="about-grid__image">
+   Ahora: <figure class="about-grid__image">
+   Reseteamos el margin por defecto del <figure>. */
+.about-grid__image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0; /* <figure> tiene margin por defecto en algunos navegadores */
+}
+
+.about__description {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+}
+
+.about__list-title {
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  margin-bottom: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.about__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.about__list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 12px 16px;
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.about__list-item:hover {
+  border-color: rgba(245, 200, 66, 0.4);
+  transform: translateX(4px);
+}
+
+.list-icon {
+  font-size: 1.2rem;
+  width: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Antes: <div class="about__img-placeholder">
+   Ahora: <figure class="about__img-placeholder"> (figure anidado dentro de figure)
+   Los <figure> anidados son válidos en HTML5. */
+.about__img-placeholder {
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, #2d1a4a 100%);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  border: 1px solid var(--color-border);
+  font-size: 5rem;
+  margin: 0; /* Resetea el margin del <figure> */
+}
+
+/* Antes: <p> dentro del div placeholder
+   Ahora: <figcaption> — semántico para la descripción de una figure */
+.about__img-placeholder figcaption {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+
+/* ================================================================
+   9. ZONAS TEMÁTICAS + CSS GRID
+   ================================================================ */
+
+/* Antes: <div class="zones-grid">
+   Ahora: <ul class="zones-grid"> — la lista no tiene bullets (reset en base)
+   El Grid se aplica al <ul>, los <li> son las celdas. */
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Los <li> dentro del zones-grid no necesitan estilos adicionales:
+   el zone-card (article) dentro de ellos ocupa todo el espacio. */
+.zones-grid > li {
+  display: contents; /* El <li> "desaparece" visualmente y su hijo
+                        (article.zone-card) se convierte en celda del grid */
+}
+
+/* ⚠️ Alternativa si display:contents da problemas: quitar > li {display:contents}
+   y poner .zone-card con height: 100%. Ambas opciones son válidas. */
+
+.zone-card {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+  cursor: pointer;
+  height: 100%; /* Ocupa todo el alto del <li> */
+  transition: transform var(--transition),
+              border-color var(--transition),
+              box-shadow var(--transition);
+}
+
+.zone-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(245, 200, 66, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(245, 200, 66, 0.1);
+}
+
+.zone-card__icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.zone-card:hover .zone-card__icon {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+.zone-card__title {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.zone-card__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+
+/* ================================================================
+   10. GALERÍA – CSS GRID CON CELDAS DE DIFERENTES TAMAÑOS
+   ================================================================ */
+
+/* Antes: <div class="gallery-grid">
+   Ahora: <ul class="gallery-grid"> */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 220px);
+  gap: var(--space-sm);
+  max-width: 1100px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Antes: <div class="gallery-item">
+   Ahora: <li class="gallery-item"> */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--color-bg-card);
+}
+
+.gallery-item--large {
+  grid-row: span 2;
+}
+
+.gallery-item--wide {
+  grid-column: span 2;
+}
+
+/* Antes: <div class="gallery-placeholder">
+   Ahora: <figure class="gallery-placeholder"> */
+.gallery-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, #1e1040 100%);
+  transition: transform 0.4s ease;
+  margin: 0; /* Resetea margin del <figure> */
+}
+
+.gallery-item:hover .gallery-placeholder {
+  transform: scale(1.05);
+}
+
+/* Antes: <div class="gallery-overlay">
+   Ahora: <figcaption class="gallery-overlay"> — semántico para el
+   texto descriptivo de cada imagen de la galería. */
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,10,18,0.9) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-md);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay span {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.05em;
+}
+
+
+/* ================================================================
+   11. SECCIÓN CTA FINAL
+   ================================================================ */
+.cta-section {
+  padding: var(--space-xxl) var(--space-lg);
+  background: linear-gradient(135deg, #1a0d30 0%, #0d0a12 100%);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+  background-image:
+    radial-gradient(rgba(245, 200, 66, 0.08) 1px, transparent 1px),
+    linear-gradient(135deg, #1a0d30 0%, #0d0a12 100%);
+  background-size: 30px 30px, 100% 100%;
+}
+
+/* Antes: <div class="cta-section__content">
+   Ahora: <article class="cta-section__content"> */
+.cta-section__content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cta-section__title {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+.cta-section__text {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xl);
+}
+
+
+/* ================================================================
+   12. FOOTER
+   ================================================================ */
+.footer {
+  background-color: #080610;
+  padding: var(--space-xxl) var(--space-xl) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Antes: <div class="footer__grid">
+   Ahora: <section class="footer__grid"> */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: var(--space-xl);
+}
+
+/* Antes: <div class="footer__logo">
+   Ahora: <p class="footer__logo"> */
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.footer__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+/* Antes: <div class="footer__social">
+   Ahora: <nav class="footer__social" aria-label="Redes sociales"> */
+.footer__social {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  font-size: 1rem;
+  transition: background-color var(--transition), border-color var(--transition),
+              transform var(--transition);
+}
+
+.social-link:hover {
+  background-color: rgba(245, 200, 66, 0.1);
+  border-color: rgba(245, 200, 66, 0.4);
+  transform: translateY(-3px);
+}
+
+.footer__heading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-md);
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer__links li {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.footer__links a {
+  color: var(--color-text-muted);
+  transition: color var(--transition);
+}
+
+.footer__links a:hover {
+  color: var(--color-gold);
+}
+
+/* Newsletter: antes <div class="newsletter">
+   Ahora: <p class="newsletter"> — igual que hero__buttons */
+.newsletter {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: 0;
+}
+
+.newsletter__input {
+  flex: 1;
+  padding: 10px 14px;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.newsletter__input:focus {
+  border-color: var(--color-gold);
+}
+
+.newsletter__input::placeholder {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.newsletter__btn {
+  width: 40px;
+  background-color: var(--color-gold);
+  color: #0d0a12;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: background-color var(--transition);
+}
+
+.newsletter__btn:hover {
+  background-color: var(--color-gold-dark);
+}
+
+/* Antes: <div class="footer__bottom">
+   Ahora: <small class="footer__bottom">
+   <small> es el elemento semántico para disclaimers y copyright. */
+.footer__bottom {
+  display: block; /* <small> es inline por defecto; lo hacemos bloque */
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-lg) 0;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer__bottom p {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+
+/* ================================================================
+   13. RESPONSIVE DESIGN – MEDIA QUERIES
+   ================================================================ */
+
+/* ---- TABLET: pantallas hasta 1024px ---- */
+@media (max-width: 1024px) {
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .zones-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .gallery-item--large,
+  .gallery-item--wide {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+
+  .gallery-item {
+    height: 200px;
+  }
+
+}
+
+
+/* ---- MOBILE: pantallas hasta 768px ---- */
+@media (max-width: 768px) {
+
+  .header {
+    padding: var(--space-md);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .header .btn {
+    display: none;
+  }
+
+  .nav {
+    width: 100%;
+    transform: translateX(100%);
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 280px;
+    background-color: #0a0814;
+    border-left: 1px solid var(--color-border);
+    padding: 80px var(--space-xl) var(--space-xl);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    order: 4;
+  }
+
+  .menu-toggle:checked ~ .nav {
+    transform: translateX(0);
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+
+  .nav__link {
+    font-size: 1.1rem;
+  }
+
+  .hero__buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+    max-width: 280px;
+  }
+
+  .about-grid {
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .about-grid__image {
+    order: -1;
+  }
+
+  .zones-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Con display:contents en los <li>, al cambiar a 1 col
+     el grid se aplica directamente a los article.zone-card */
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-md) 0;
+  }
+
+}
+
+
+/* ---- MOBILE PEQUEÑO: pantallas hasta 480px ---- */
+@media (max-width: 480px) {
+
+  .festival-table thead th,
+  .festival-table tbody td {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  .hero {
+    padding-top: 60px;
+  }
+
+}
+
+
+/* ================================================================
+   14. ANIMACIONES CSS ADICIONALES
+   ================================================================ */
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 200, 66, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(245, 200, 66, 0);
+  }
+}
+
+.hero .btn--gold {
+  animation: pulse 2.5s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
